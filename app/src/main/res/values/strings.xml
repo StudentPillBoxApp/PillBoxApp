@@ -16,4 +16,5 @@
     <string name="label_confirm_password">"Confirm Password:"</string>
     <string name="label_carer_checkbox">"Need a carer"</string>
     <string name="title_patient_details">"Need a carer"</string>
+    <string name="action_sign_up">"Sign Up"</string>
 </resources>

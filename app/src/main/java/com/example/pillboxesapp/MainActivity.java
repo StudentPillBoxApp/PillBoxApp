@@ -8,22 +8,23 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnRegister;
+    private Button btnSignUp;
+    private Button btnLogIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnRegister = (Button) findViewById(R.id.btnSignUp);
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        btnSignUp = (Button) findViewById(R.id.btnSignUp);
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openRegisterActivity();
+                openSignUpActivity();
             }
         });
     }
 
-    public void openRegisterActivity() {
+    public void openSignUpActivity() {
         Intent intent = new Intent(this, PatientSignUpScreen.class);
         startActivity(intent);
     }

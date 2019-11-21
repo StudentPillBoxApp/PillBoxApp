@@ -8,11 +8,11 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btnLogIn"
+        android:id="@+id/btnSignIn"
         android:layout_width="206dp"
         android:layout_height="71dp"
         android:background="#FF9800"
-        android:text="Log In"
+        android:text="@string/action_sign_in"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogIn"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
         app:layout_constraintVertical_bias="0.43" />
 
     <TextView
@@ -60,7 +60,7 @@
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogIn"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
