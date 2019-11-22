@@ -4,17 +4,16 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_email">Not a valid email</string>
+    <string name="invalid_password">Password must be greater than 5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="label_first_name">"First Name:"</string>
-    <string name="label_last_name">"Last Name:"</string>
-    <string name="label_email">"Email:"</string>
-    <string name="label_password">"Password:"</string>
-    <string name="label_confirm_password">"Confirm Password:"</string>
+    <string name="prompt_first_name">"First Name"</string>
+    <string name="prompt_last_name">"Last Name"</string>
+    <string name="prompt_confirm_password">"Confirm Password"</string>
     <string name="label_carer_checkbox">"Need a carer"</string>
-    <string name="title_patient_details">"Need a carer"</string>
+    <string name="title_patient_details">"Patient Details"</string>
+    <string name="title_app">"Smart Pill Organiser App"</string>
     <string name="action_sign_up">"Sign Up"</string>
+    <string name="action_carer">"Carer"</string>
 </resources>

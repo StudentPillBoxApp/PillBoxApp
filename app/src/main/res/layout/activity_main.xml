@@ -1,81 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorPrimaryDark"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:fillViewport="true"
+>
 
-    <Button
-        android:id="@+id/btnSignIn"
-        android:layout_width="206dp"
-        android:layout_height="71dp"
-        android:background="#FF9800"
-        android:text="@string/action_sign_in"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="206dp"
-        android:layout_height="71dp"
-        android:background="#FF9800"
-        android:text="Sign Up"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
-        app:layout_constraintVertical_bias="0.43" />
+        <Button
+            android:id="@+id/btnCarer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_dark"
+            android:text="@string/action_carer"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintTop_toTopOf="@+id/guidelineT" />
 
-    <TextView
-        android:id="@+id/txtPatient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Patient"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_light"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/title_app"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/btnCarer" />
 
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="375dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="8dp"
-        android:text="Smart Pill Organiser App"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_light"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:background="@android:color/holo_orange_dark"
+            android:text="@string/action_sign_in"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
-    <Button
-        android:id="@+id/btnCarer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FF9800"
-        android:text="Carer"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
-        app:layout_constraintStart_toEndOf="@+id/txtPatient"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:background="@android:color/holo_orange_dark"
+            android:text="@string/action_sign_up"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineB"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

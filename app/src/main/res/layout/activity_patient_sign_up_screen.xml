@@ -1,206 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".PatientSignUpScreen">
+    tools:context=".PatientSignUp"
+    android:fillViewport="true"
+>
 
-    <TextView
-        android:id="@+id/txtEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:text="@string/label_email"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLastName"
-        app:layout_constraintVertical_bias="0.0" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txtRegisterTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Patient Details"
-        android:textColor="@android:color/background_light"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.120000005" />
+        <TextView
+            android:id="@+id/txtSignUpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_patient_details"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toTopOf="@+id/guidelineT" />
 
-    <TextView
-        android:id="@+id/txtFirstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="@string/label_first_name"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterTitle"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/txtLastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:text="@string/label_last_name"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFirstName"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/txtFirstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:hint="@string/prompt_first_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/background_light"
+            app:backgroundTint="@android:color/background_light"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/txtSignUpTitle" />
 
-    <TextView
-        android:id="@+id/txtPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:text="@string/label_password"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/txtLastName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/prompt_last_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/background_light"
+            app:backgroundTint="@android:color/background_light"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/txtFirstName" />
 
-    <TextView
-        android:id="@+id/txtRePassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:text="@string/label_confirm_password"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/prompt_email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/background_light"
+            app:backgroundTint="@android:color/background_light"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/txtLastName" />
 
-    <CheckBox
-        android:id="@+id/chkCarer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:button="@null"
-        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-        android:text="@string/label_carer_checkbox"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRePassword"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/txtPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/prompt_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            app:backgroundTint="@android:color/background_light"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
-    <EditText
-        android:id="@+id/txtBoxPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:background="@android:color/background_light"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBoxEmail"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/txtRePassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/prompt_confirm_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            app:backgroundTint="@android:color/background_light"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
-    <EditText
-        android:id="@+id/txtBoxRePassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:background="@android:color/background_light"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBoxPassword"
-        app:layout_constraintVertical_bias="0.0" />
+        <CheckBox
+            android:id="@+id/chkCarer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:button="@null"
+            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+            android:text="@string/label_carer_checkbox"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/txtRePassword" />
 
-    <EditText
-        android:id="@+id/txtBoxEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:background="@android:color/background_light"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBoxLastName"
-        app:layout_constraintVertical_bias="0.0" />
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@android:color/holo_orange_dark"
+            android:text="@string/action_sign_up"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineB"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineR"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/chkCarer"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/txtBoxFirstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:background="@android:color/background_light"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterTitle"
-        app:layout_constraintVertical_bias="0.0" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
 
-    <EditText
-        android:id="@+id/txtBoxLastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:background="@android:color/background_light"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBoxFirstName"
-        app:layout_constraintVertical_bias="0.0" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
 
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:background="#FF9800"
-        android:text="@string/action_sign_up"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBoxRePassword"
-        app:layout_constraintVertical_bias="0.0" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
