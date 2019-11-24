@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-
-import com.example.pillboxesapp.ui.login.LoginActivity;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,28 +13,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Button btnSignUp = findViewById(R.id.btnSignUp);
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        createButtonListeners();
+    }
+
+    private void createButtonListeners() {
+        TextView newUserLink = findViewById(R.id.txtNewUser);
+        newUserLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSignUpActivity();
             }
         });
-        final Button btnSignIn = findViewById(R.id.btnSignIn);
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        TextView forgotPasswordLink = findViewById(R.id.txtForgotPassword);
+        forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSignInActivity();
+                openForgotPasswordActivity();
             }
         });
     }
 
-    public void openSignUpActivity() {
-        Intent intent = new Intent(this, PatientSignUp.class);
-        startActivity(intent);
+    private void openSignUpActivity(){
+        Intent intentNewUser = new Intent (this, SignUpActivity.class);
+        startActivity(intentNewUser);
     }
-    public void openSignInActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+    private void openForgotPasswordActivity(){
+        Intent intentForgotPassword = new Intent (this, ForgotPasswordActivity.class);
+        startActivity(intentForgotPassword);
     }
+
 }
