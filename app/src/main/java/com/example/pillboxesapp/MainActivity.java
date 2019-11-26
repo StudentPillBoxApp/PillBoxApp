@@ -23,35 +23,58 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuthentication;
     private ProgressBar progressRing;
+    private Button loginButton;
+    private TextView newUserLink;
+    private TextView forgotPasswordLink;
+    private EditText emailBox;
+    private EditText passwordBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkLoginStatus();
+        assignWidgets();
+        createButtonListeners();
+    }
+
+    private void checkLoginStatus() {
         firebaseAuthentication = FirebaseAuth.getInstance();
         if (firebaseAuthentication.getCurrentUser() != null) {
             openHomeActivity();
         }
-        createButtonListeners();
+    }
+
+    private void openHomeActivity() {
+        Intent intentHome = new Intent(this, HomeActivity.class);
+        startActivity(intentHome);
+        finish(); // stops the app from going back
+    }
+
+    private void assignWidgets() {
+        progressRing = findViewById(R.id.progressBar);
+        loginButton = findViewById(R.id.btnSignIn);
+        forgotPasswordLink = findViewById(R.id.txtForgotPassword);
+        newUserLink = findViewById(R.id.txtNewUser);
+        emailBox = findViewById(R.id.txtEmail);
+        passwordBox = findViewById(R.id.txtPassword);
     }
 
     private void createButtonListeners() {
-        Button loginButton = findViewById(R.id.btnSignIn);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeKeyboard();
+                showProgressRing();
                 attemptUserLogin();
             }
         });
-        TextView newUserLink = findViewById(R.id.txtNewUser);
         newUserLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSignUpActivity();
             }
         });
-        TextView forgotPasswordLink = findViewById(R.id.txtForgotPassword);
         forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,46 +87,10 @@ public class MainActivity extends AppCompatActivity {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
-    private void attemptUserLogin() {
-        EditText emailBox = findViewById(R.id.txtEmail);
-        EditText passwordBox = findViewById(R.id.txtPassword);
-        String email = emailBox.getText().toString().trim();
-        String password = passwordBox.getText().toString().trim();
-        if (TextUtils.isEmpty(email)) {
-            emailBox.setError(emailChecker.EMAIL_EMPTY_ERROR);
-            return;
-        }
-        emailChecker emailCheck = new emailChecker(email);
-        if (!emailCheck.isEmailAddressValid()) {
-            emailBox.setError(emailChecker.EMAIL_FORMAT_ERROR);
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            passwordBox.setError("Password required");
-            return;
-        }
-        if (password.length() < 6) {
-            passwordBox.setError("Password must have at least 6 characters");
-            return;
-        }
-        progressRing = findViewById(R.id.progressBar);
-        showProgressRing();
-        firebaseAuthentication.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
-                    openHomeActivity();
-                } else {
-                    Toast.makeText(MainActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    hideProgressRing();
-                }
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
-        });
+        }
     }
 
     private void showProgressRing() {
@@ -114,6 +101,51 @@ public class MainActivity extends AppCompatActivity {
         progressRing.setVisibility(View.INVISIBLE);
     }
 
+    private void attemptUserLogin() {
+        String email = emailBox.getText().toString().trim();
+        String password = passwordBox.getText().toString().trim();
+        if (!validFields(email, password)) {
+            return;
+        }
+        firebaseAuthentication = FirebaseAuth.getInstance();
+        firebaseAuthentication.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    hideProgressRing();
+                    Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+                    openHomeActivity();
+                } else {
+                    hideProgressRing();
+                    Toast.makeText(MainActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    // TODO: Fix null-pointer exception.
+
+                }
+            }
+        });
+    }
+
+    private boolean validFields(String email, String password) {
+        if (TextUtils.isEmpty(email)) {
+            emailBox.setError(emailChecker.EMAIL_EMPTY_ERROR);
+            return false;
+        }
+        emailChecker emailCheck = new emailChecker(email);
+        if (!emailCheck.isEmailAddressValid()) {
+            emailBox.setError(emailChecker.EMAIL_FORMAT_ERROR);
+            return false;
+        }
+        if (TextUtils.isEmpty(password)) {
+            passwordBox.setError("Password required");
+            return false;
+        }
+        if (password.length() < 6) {
+            passwordBox.setError("Password must have at least 6 characters");
+            return false;
+        }
+        return true;
+    }
+
     private void openSignUpActivity() {
         Intent intentNewUser = new Intent(this, SignUpActivity.class);
         startActivity(intentNewUser);
@@ -122,11 +154,5 @@ public class MainActivity extends AppCompatActivity {
     private void openForgotPasswordActivity() {
         Intent intentForgotPassword = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intentForgotPassword);
-    }
-
-    private void openHomeActivity() {
-        Intent intentHome = new Intent(this, HomeActivity.class);
-        startActivity(intentHome);
-        finish(); // stops the app from going back
     }
 }

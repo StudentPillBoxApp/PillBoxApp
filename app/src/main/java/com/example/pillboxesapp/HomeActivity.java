@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void logout() {
         FirebaseAuth firebaseAuthentication = FirebaseAuth.getInstance();
-        firebaseAuthentication.signOut();
+        firebaseAuthentication.signOut(); // TODO: Add completion and fail listeners
         Intent logoutIntent = new Intent(this, MainActivity.class);
         startActivity(logoutIntent);
         finish();

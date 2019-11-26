@@ -18,20 +18,27 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
-    private final String Title = "Forgotten Password";
+    private final String TITLE = "Forgotten Password";
     private ProgressBar progressRing;
+    private EditText emailBox;
+    private Button emailButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-        this.setTitle(Title);
+        this.setTitle(TITLE);
+        assignWidgets();
         createSendEmailListener();
+    }
+
+    private void assignWidgets() {
         progressRing = findViewById(R.id.progressBar);
+        emailButton = findViewById(R.id.btnSendEmail);
+        emailBox = findViewById(R.id.txtEmail);
     }
 
     private void createSendEmailListener() {
-        Button emailButton = findViewById(R.id.btnSendEmail);
         emailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,32 +49,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
     }
 
-    private void sendResetLinkEmail() {
-        EditText emailBox = findViewById(R.id.txtEmail);
-        String email = emailBox.getText().toString().trim();
-        if (TextUtils.isEmpty(email)) {
-            emailBox.setError(emailChecker.EMAIL_EMPTY_ERROR);
-            return;
-        }
-        emailChecker emailCheck = new emailChecker(email);
-        if (!emailCheck.isEmailAddressValid()) {
-            emailBox.setError(emailChecker.EMAIL_FORMAT_ERROR);
-            return;
-        }
-
-        FirebaseAuth firebaseAuthentication = FirebaseAuth.getInstance();
-        firebaseAuthentication.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(ForgotPasswordActivity.this, "Email Sent", Toast.LENGTH_SHORT).show();
-                    hideProgressRing();
-                } else {
-                    Toast.makeText(ForgotPasswordActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    hideProgressRing();
-                }
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
-        });
+        }
     }
 
     private void showProgressRing() {
@@ -78,11 +67,37 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         progressRing.setVisibility(View.INVISIBLE);
     }
 
-    private void closeKeyboard() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    private void sendResetLinkEmail() {
+        String email = emailBox.getText().toString().trim();
+        if (!validFields(email)) {
+            return;
         }
+        FirebaseAuth firebaseAuthentication = FirebaseAuth.getInstance();
+        firebaseAuthentication.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    hideProgressRing();
+                    Toast.makeText(ForgotPasswordActivity.this, "Email Sent", Toast.LENGTH_SHORT).show();
+                } else {
+                    hideProgressRing();
+                    Toast.makeText(ForgotPasswordActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    // TODO: Fix null-pointer exception.
+                }
+            }
+        });
+    }
+
+    private boolean validFields(String email) {
+        if (TextUtils.isEmpty(email)) {
+            emailBox.setError(emailChecker.EMAIL_EMPTY_ERROR);
+            return false;
+        }
+        emailChecker emailCheck = new emailChecker(email);
+        if (!emailCheck.isEmailAddressValid()) {
+            emailBox.setError(emailChecker.EMAIL_FORMAT_ERROR);
+            return false;
+        }
+        return true;
     }
 }

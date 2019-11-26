@@ -28,21 +28,30 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText emailBox;
     private EditText passwordBox;
     private EditText confirmPasswordBox;
+    private Switch isCarer;
+    private Switch hasCarer;
+    private Button signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         this.setTitle(Title);
-        createButtonListeners();
+        assignWidgets();
+        createWidgetListeners();
     }
 
-    private void createButtonListeners() {
+    private void assignWidgets() {
         progressRing = findViewById(R.id.progressBar);
         emailBox = findViewById(R.id.txtEmail);
         passwordBox = findViewById(R.id.txtPassword);
         confirmPasswordBox = findViewById(R.id.txtRePassword);
-        final Button signUpButton = findViewById(R.id.btnSignUp);
+        isCarer = findViewById(R.id.swtIsACarer);
+        hasCarer = findViewById(R.id.swtHasACarer);
+        signUpButton = findViewById(R.id.btnSignUp);
+    }
+
+    private void createWidgetListeners() {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,8 +60,6 @@ public class SignUpActivity extends AppCompatActivity {
                 createUser();
             }
         });
-        final Switch isCarer = findViewById(R.id.swtIsACarer);
-        final Switch hasCarer = findViewById(R.id.swtHasACarer);
         isCarer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked && hasCarer.isChecked()) {
@@ -70,28 +77,30 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void createUser() {
-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuthentication = FirebaseAuth.getInstance();
         String email = emailBox.getText().toString().trim();
         String password = passwordBox.getText().toString().trim();
         String confirmPassword = confirmPasswordBox.getText().toString().trim();
-        if (!checkFields(email, password, confirmPassword)) {
+        if (!validFields(email, password, confirmPassword)) {
             return;
         }
-        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuthentication.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    hideProgressRing();
                     Toast.makeText(SignUpActivity.this, "User Created", Toast.LENGTH_SHORT).show();
                     openHomeActivity();
                 } else {
                     hideProgressRing();
                     Toast.makeText(SignUpActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    // TODO: Fix null-pointer exception.
                 }
             }
         });
     }
 
-    private boolean checkFields (String email, String password, String confirmPassword) {
+    private boolean validFields(String email, String password, String confirmPassword) {
         if (TextUtils.isEmpty(email)) {
             emailBox.setError(emailChecker.EMAIL_EMPTY_ERROR);
             return false;
