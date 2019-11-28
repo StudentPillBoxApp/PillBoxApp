@@ -52,12 +52,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void assignWidgets() {
-        progressRing = findViewById(R.id.progressBar);
-        loginButton = findViewById(R.id.btnSignIn);
-        forgotPasswordLink = findViewById(R.id.txtForgotPassword);
-        newUserLink = findViewById(R.id.txtNewUser);
-        emailBox = findViewById(R.id.txtEmail);
-        passwordBox = findViewById(R.id.txtPassword);
+        progressRing = findViewById(R.id.main_progressBar);
+        loginButton = findViewById(R.id.main_btnSignIn);
+        forgotPasswordLink = findViewById(R.id.main_txtForgotPassword);
+        newUserLink = findViewById(R.id.main_txtNewUser);
+        emailBox = findViewById(R.id.main_txtEmail);
+        passwordBox = findViewById(R.id.main_txtPassword);
     }
 
     private void createButtonListeners() {
