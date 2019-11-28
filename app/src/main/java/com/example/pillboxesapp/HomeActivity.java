@@ -19,7 +19,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void createButtonListeners() {
-        Button logout = findViewById(R.id.homeBtnLogout);
+        Button logout = findViewById(R.id.home_btnLogout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

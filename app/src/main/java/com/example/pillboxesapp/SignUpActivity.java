@@ -42,13 +42,13 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void assignWidgets() {
-        progressRing = findViewById(R.id.progressBar);
-        emailBox = findViewById(R.id.txtEmail);
-        passwordBox = findViewById(R.id.txtPassword);
-        confirmPasswordBox = findViewById(R.id.txtRePassword);
-        isCarer = findViewById(R.id.swtIsACarer);
-        hasCarer = findViewById(R.id.swtHasACarer);
-        signUpButton = findViewById(R.id.btnSignUp);
+        progressRing = findViewById(R.id.su_progressBar);
+        emailBox = findViewById(R.id.su_txtEmail);
+        passwordBox = findViewById(R.id.su_txtPassword);
+        confirmPasswordBox = findViewById(R.id.su_txtRePassword);
+        isCarer = findViewById(R.id.su_swtIsACarer);
+        hasCarer = findViewById(R.id.su_swtHasACarer);
+        signUpButton = findViewById(R.id.su_btnSignUp);
     }
 
     private void createWidgetListeners() {

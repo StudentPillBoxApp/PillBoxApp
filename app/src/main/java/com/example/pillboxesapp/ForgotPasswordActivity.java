@@ -33,9 +33,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void assignWidgets() {
-        progressRing = findViewById(R.id.progressBar);
-        emailButton = findViewById(R.id.btnSendEmail);
-        emailBox = findViewById(R.id.txtEmail);
+        progressRing = findViewById(R.id.fp_progressBar);
+        emailButton = findViewById(R.id.fp_btnSendEmail);
+        emailBox = findViewById(R.id.fp_txtEmail);
     }
 
     private void createSendEmailListener() {
