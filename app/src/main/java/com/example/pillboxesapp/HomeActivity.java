@@ -21,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
     private final int btEnableCode = 1;
     private BluetoothAdapter btAdapter;
     private BluetoothSocket btSocket;
-    private static final UUID arduinoID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // Arduino Unique Identifier.
+    private static final UUID arduinoID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // Service Unique Identifier set by Arduino.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
