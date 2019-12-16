@@ -21,9 +21,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     private final String Title = "Create Account";
+    private FirebaseAuth firebaseAuthentication = FirebaseAuth.getInstance();
     private ProgressBar progressRing;
     private EditText emailBox;
     private EditText passwordBox;
@@ -31,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Switch isCarer;
     private Switch hasCarer;
     private Button signUpButton;
+    private String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,19 +82,19 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void createUser() {
-        FirebaseAuth firebaseAuthentication = FirebaseAuth.getInstance();
-        String email = emailBox.getText().toString().trim();
+        userEmail = emailBox.getText().toString().trim();
         String password = passwordBox.getText().toString().trim();
         String confirmPassword = confirmPasswordBox.getText().toString().trim();
-        if (!validFields(email, password, confirmPassword)) {
+        if (!validFields(password, confirmPassword)) {
             return;
         }
-        firebaseAuthentication.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuthentication.createUserWithEmailAndPassword(userEmail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     hideProgressRing();
                     Toast.makeText(SignUpActivity.this, "User Created", Toast.LENGTH_SHORT).show();
+                    addUserCollectionToDatabase();
                     openHomeActivity();
                 } else {
                     hideProgressRing();
@@ -100,12 +105,12 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    private boolean validFields(String email, String password, String confirmPassword) {
-        if (TextUtils.isEmpty(email)) {
+    private boolean validFields(String password, String confirmPassword) {
+        if (TextUtils.isEmpty(userEmail)) {
             emailBox.setError(emailChecker.EMAIL_EMPTY_ERROR);
             return false;
         }
-        emailChecker emailCheck = new emailChecker(email);
+        emailChecker emailCheck = new emailChecker(userEmail);
         if (!emailCheck.isEmailAddressValid()) {
             emailBox.setError(emailChecker.EMAIL_FORMAT_ERROR);
             return false;
@@ -141,6 +146,16 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void hideProgressRing() {
         progressRing.setVisibility(View.INVISIBLE);
+    }
+
+    private void addUserCollectionToDatabase() {
+        DatabaseService dbService = new DatabaseService();
+        FirebaseUser newUser = firebaseAuthentication.getCurrentUser();
+        if (newUser != null) {
+            String userId = firebaseAuthentication.getCurrentUser().getUid();
+            Map<String, Object> userData = dbService.createUserDataSet(userEmail, isCarer.isChecked(), hasCarer.isChecked());
+            dbService.addUser(userId, userData);
+        }
     }
 
     private void openHomeActivity() {
