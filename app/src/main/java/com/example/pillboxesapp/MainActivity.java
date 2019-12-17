@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openHomeActivity() {
-        Intent intentHome = new Intent(this, HomeActivity.class);
+        Intent intentHome = new Intent(this, MainPageActivity.class);
         startActivity(intentHome);
         finish(); // stops the app from going back
     }
