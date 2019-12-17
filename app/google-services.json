@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "810150607127-hqi04ug0f12al6ulduprk0qe972bvs38.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pillboxesapp",
+            "certificate_hash": "bc1f7c3ff50375ed6191e8a34499a51ec8747600"
+          }
+        },
+        {
           "client_id": "810150607127-sev221pviaheif95lheui00ohi8k90pf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
