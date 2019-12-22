@@ -1,4 +1,4 @@
-package com.example.pillboxesapp;
+package com.example.pillboxesapp.Database;
 
 public interface IDatabaseService {
     String FIELD_USER_NAME = "name";
