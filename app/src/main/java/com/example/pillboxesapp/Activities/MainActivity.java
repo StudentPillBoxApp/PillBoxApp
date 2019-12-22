@@ -1,4 +1,4 @@
-package com.example.pillboxesapp;
+package com.example.pillboxesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pillboxesapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -127,12 +128,12 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean validFields(String email, String password) {
         if (TextUtils.isEmpty(email)) {
-            emailBox.setError(emailChecker.EMAIL_EMPTY_ERROR);
+            emailBox.setError(EmailChecker.EMAIL_EMPTY_ERROR);
             return false;
         }
-        emailChecker emailCheck = new emailChecker(email);
+        EmailChecker emailCheck = new EmailChecker(email);
         if (!emailCheck.isEmailAddressValid()) {
-            emailBox.setError(emailChecker.EMAIL_FORMAT_ERROR);
+            emailBox.setError(EmailChecker.EMAIL_FORMAT_ERROR);
             return false;
         }
         if (TextUtils.isEmpty(password)) {

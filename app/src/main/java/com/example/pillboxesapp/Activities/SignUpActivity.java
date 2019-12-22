@@ -1,4 +1,4 @@
-package com.example.pillboxesapp;
+package com.example.pillboxesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,10 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 
+import com.example.pillboxesapp.Database.CallbackResult;
+import com.example.pillboxesapp.Database.DatabaseService;
+import com.example.pillboxesapp.R;
+import com.example.pillboxesapp.Database.UserEntity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -103,12 +107,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean validFields(String password, String confirmPassword) {
         if (TextUtils.isEmpty(userEmail)) {
-            emailBox.setError(emailChecker.EMAIL_EMPTY_ERROR);
+            emailBox.setError(EmailChecker.EMAIL_EMPTY_ERROR);
             return false;
         }
-        emailChecker emailCheck = new emailChecker(userEmail);
+        EmailChecker emailCheck = new EmailChecker(userEmail);
         if (!emailCheck.isEmailAddressValid()) {
-            emailBox.setError(emailChecker.EMAIL_FORMAT_ERROR);
+            emailBox.setError(EmailChecker.EMAIL_FORMAT_ERROR);
             return false;
         }
         if (TextUtils.isEmpty(password)) {

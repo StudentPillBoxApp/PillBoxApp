@@ -1,4 +1,4 @@
-package com.example.pillboxesapp;
+package com.example.pillboxesapp.Database;
 
 public class PillBoxEntity {
     private String boxID;
