@@ -23,11 +23,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Map;
-
 public class SignUpActivity extends AppCompatActivity {
     private final String Title = "Create Account";
-    private FirebaseAuth firebaseAuthentication = FirebaseAuth.getInstance();
+    private FirebaseAuth firebaseAuthentication;
     private ProgressBar progressRing;
     private EditText emailBox;
     private EditText passwordBox;
@@ -42,6 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         this.setTitle(Title);
+        firebaseAuthentication = FirebaseAuth.getInstance();
         assignWidgets();
         createWidgetListeners();
     }
@@ -92,10 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    hideProgressRing();
-                    Toast.makeText(SignUpActivity.this, "User Created", Toast.LENGTH_SHORT).show();
                     addUserCollectionToDatabase();
-                    openHomeActivity();
                 } else {
                     hideProgressRing();
                     Toast.makeText(SignUpActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -149,12 +145,23 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void addUserCollectionToDatabase() {
-        DatabaseService dbService = new DatabaseService();
+        final DatabaseService dbService = new DatabaseService();
         FirebaseUser newUser = firebaseAuthentication.getCurrentUser();
         if (newUser != null) {
             String userId = firebaseAuthentication.getCurrentUser().getUid();
-            Map<String, Object> userData = dbService.createUserDataSet(userEmail, isCarer.isChecked(), hasCarer.isChecked());
-            dbService.addUser(userId, userData);
+            UserEntity userEntity = new UserEntity(userId, userEmail, isCarer.isChecked(), hasCarer.isChecked());
+            dbService.addUser(userEntity, new CallbackResult() {
+                @Override
+                public void onCallback(Boolean result) {
+                    hideProgressRing();
+                    if (result) {
+                        Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
+                        openHomeActivity();
+                    } else {
+                        Toast.makeText(SignUpActivity.this, "Error: User details could not be added to the database.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 
