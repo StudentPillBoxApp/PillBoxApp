@@ -7,7 +7,7 @@ public class PillBoxEntity {
     private int boxNum;
     private int pillStock;
 
-    public PillBoxEntity(String boxID, String userID, int boxNum, String pillName) {
+    public PillBoxEntity(String boxID, String userID, String pillName, int boxNum) {
         this.boxID = boxID;
         this.userID = userID;
         this.boxNum = boxNum;
