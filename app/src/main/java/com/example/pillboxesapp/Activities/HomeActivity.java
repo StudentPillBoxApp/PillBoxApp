@@ -2,36 +2,50 @@ package com.example.pillboxesapp.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.pillboxesapp.R;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
     private final int btEnableCode = 1;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        createButtonListeners();
+        setupTabs();
         enableBluetooth();
     }
 
-    private void createButtonListeners() {
-        Button logout = findViewById(R.id.home_btnLogout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-            }
-        });
+    private void setupTabs() {
+        viewPager = findViewById(R.id.view_pager);
+        setupViewPager();
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void setupViewPager() {
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ScheduleFragment(), "Schedule");
+        adapter.addFragment(new PillsFragment(), "Pills");
+        adapter.addFragment(new AccountFragment(), "Account");
+        viewPager.setAdapter(adapter);
+    }
+
+    protected void logoutProcess() {
+        FirebaseAuth firebaseAuthentication = FirebaseAuth.getInstance();
+        firebaseAuthentication.signOut(); // TODO: Add completion and fail listeners
+        Intent logoutIntent = new Intent(this, MainActivity.class);
+        startActivity(logoutIntent);
+        finish();
     }
 
     private void enableBluetooth() {
@@ -48,21 +62,12 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == btEnableCode){
-            if (resultCode == RESULT_OK){
+        if (requestCode == btEnableCode) {
+            if (resultCode == RESULT_OK) {
                 Toast.makeText(HomeActivity.this, "Bluetooth enabled.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(HomeActivity.this, "Bluetooth not enabled.", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-    private void logout() {
-        FirebaseAuth firebaseAuthentication = FirebaseAuth.getInstance();
-        firebaseAuthentication.signOut(); // TODO: Add completion and fail listeners
-        Intent logoutIntent = new Intent(this, MainActivity.class);
-        startActivity(logoutIntent);
-        finish();
-    }
-
 }
