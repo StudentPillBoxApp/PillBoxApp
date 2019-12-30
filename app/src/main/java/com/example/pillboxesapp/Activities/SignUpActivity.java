@@ -21,6 +21,7 @@ import com.example.pillboxesapp.Database.CallbackResult;
 import com.example.pillboxesapp.Database.DatabaseService;
 import com.example.pillboxesapp.R;
 import com.example.pillboxesapp.Database.UserEntity;
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -31,12 +32,14 @@ public class SignUpActivity extends AppCompatActivity {
     private final String Title = "Create Account";
     private FirebaseAuth firebaseAuthentication;
     private ProgressBar progressRing;
+    private EditText nameBox;
     private EditText emailBox;
     private EditText passwordBox;
     private EditText confirmPasswordBox;
     private Switch isCarer;
     private Switch hasCarer;
     private Button signUpButton;
+    private String userName;
     private String userEmail;
 
     @Override
@@ -50,6 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void assignWidgets() {
+        nameBox = findViewById(R.id.su_txtName);
         progressRing = findViewById(R.id.su_progressBar);
         emailBox = findViewById(R.id.su_txtEmail);
         passwordBox = findViewById(R.id.su_txtPassword);
@@ -85,13 +89,16 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void createUser() {
+        userName = nameBox.getText().toString();
         userEmail = emailBox.getText().toString().trim();
         String password = passwordBox.getText().toString().trim();
         String confirmPassword = confirmPasswordBox.getText().toString().trim();
         if (!validFields(password, confirmPassword)) {
+            hideProgressRing();
             return;
         }
-        firebaseAuthentication.createUserWithEmailAndPassword(userEmail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        Task<AuthResult> loginTask = firebaseAuthentication.createUserWithEmailAndPassword(userEmail, password);
+        loginTask.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -103,9 +110,20 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+        loginTask.addOnCanceledListener(new OnCanceledListener() {
+            @Override
+            public void onCanceled() {
+                hideProgressRing();
+                Toast.makeText(SignUpActivity.this, "Error: ", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private boolean validFields(String password, String confirmPassword) {
+        if (TextUtils.isEmpty(userName)) {
+            nameBox.setError("Your name is required");
+            return false;
+        }
         if (TextUtils.isEmpty(userEmail)) {
             emailBox.setError(EmailChecker.EMAIL_EMPTY_ERROR);
             return false;
@@ -153,7 +171,7 @@ public class SignUpActivity extends AppCompatActivity {
         FirebaseUser newUser = firebaseAuthentication.getCurrentUser();
         if (newUser != null) {
             String userId = firebaseAuthentication.getCurrentUser().getUid();
-            UserEntity userEntity = new UserEntity(userId, userEmail, isCarer.isChecked(), hasCarer.isChecked());
+            UserEntity userEntity = new UserEntity(userId, userName, userEmail, isCarer.isChecked(), hasCarer.isChecked());
             dbService.addUser(userEntity, new CallbackResult() {
                 @Override
                 public void onCallback(Boolean result) {

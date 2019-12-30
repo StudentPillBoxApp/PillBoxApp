@@ -18,7 +18,7 @@ public interface IDatabaseService {
     String VALUE_CARER = "carer";
     String VALUE_PATIENT = "patient";
 
-    String COLLECTION_USER = "users";
+    String COLLECTION_USER = "Users";
     String COLLECTION_PILL_BOXES = "PillBoxes";
     String COLLECTION_ALARMS = "Alarms";
 

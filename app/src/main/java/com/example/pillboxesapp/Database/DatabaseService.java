@@ -47,6 +47,7 @@ public class DatabaseService implements IDatabaseService {
         if (userEntity.isCarer()) {
             userType = VALUE_CARER;
         }
+        userData.put(FIELD_USER_NAME, userEntity.getName());
         userData.put(FIELD_EMAIL, userEntity.getEmail());
         userData.put(FIELD_USER_TYPE, userType);
         return userData;
