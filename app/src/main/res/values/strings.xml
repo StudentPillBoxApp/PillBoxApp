@@ -5,6 +5,7 @@
     <string name="action_forgot_password">"Forgot your password?"</string>
     <string name="action_new_user">"New user? Sign up here."</string>
     <string name="action_send_email">Send Email</string>
+    <string name="prompt_name">Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_confirm_password">"Confirm Password"</string>
