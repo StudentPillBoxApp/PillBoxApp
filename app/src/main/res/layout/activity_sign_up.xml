@@ -12,11 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <EditText
+            android:id="@+id/su_txtName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Name"
+            android:importantForAutofill="no"
+            android:textColor="@android:color/background_light"
+            app:backgroundTint="@android:color/background_light"
+            app:layout_constraintEnd_toStartOf="@+id/su_guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/su_guidelineL"
+            app:layout_constraintTop_toTopOf="@+id/su_guidelineT" />
 
         <EditText
             android:id="@+id/su_txtEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="@string/prompt_email"
             android:importantForAutofill="no"
@@ -25,7 +39,7 @@
             app:backgroundTint="@android:color/background_light"
             app:layout_constraintEnd_toStartOf="@+id/su_guidelineR"
             app:layout_constraintStart_toStartOf="@+id/su_guidelineL"
-            app:layout_constraintTop_toTopOf="@+id/su_guidelineT" />
+            app:layout_constraintTop_toBottomOf="@+id/su_txtName" />
 
         <EditText
             android:id="@+id/su_txtPassword"
@@ -142,6 +156,7 @@
             app:layout_constraintStart_toStartOf="@+id/su_guidelineL"
             app:layout_constraintTop_toBottomOf="@+id/su_btnSignUp"
             app:layout_constraintVertical_bias="0.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
