@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Name"
+            android:hint="@string/prompt_name"
             android:importantForAutofill="no"
             android:textColor="@android:color/background_light"
             app:backgroundTint="@android:color/background_light"
@@ -114,21 +114,6 @@
             app:layout_constraintGuide_percent="0.9" />
 
         <Switch
-            android:id="@+id/su_swtHasACarer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:switchPadding="10dp"
-            android:text="@string/label_has_carer"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/su_guidelineR"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/su_guidelineL"
-            app:layout_constraintTop_toBottomOf="@+id/su_txtRePassword" />
-
-        <Switch
             android:id="@+id/su_swtIsACarer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,7 +126,7 @@
             app:layout_constraintEnd_toStartOf="@+id/su_guidelineR"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/su_guidelineL"
-            app:layout_constraintTop_toBottomOf="@+id/su_swtHasACarer" />
+            app:layout_constraintTop_toBottomOf="@+id/su_txtRePassword" />
 
         <ProgressBar
             android:id="@+id/su_progressBar"

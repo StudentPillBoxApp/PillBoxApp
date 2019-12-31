@@ -5,15 +5,13 @@ public class UserEntity {
     private String name;
     private String email;
     private boolean isCarer;
-    private boolean needsCarer;
 
 
-    public UserEntity(String userID, String name, String email, boolean isCarer, boolean needsCarer) {
+    public UserEntity(String userID, String name, String email, boolean isCarer) {
         this.userID = userID;
         this.name = name;
         this.email = email;
         this.isCarer = isCarer;
-        this.needsCarer = needsCarer;
     }
 
     public String getName() {

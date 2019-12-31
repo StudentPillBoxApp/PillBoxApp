@@ -37,7 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText passwordBox;
     private EditText confirmPasswordBox;
     private Switch isCarer;
-    private Switch hasCarer;
     private Button signUpButton;
     private String userName;
     private String userEmail;
@@ -59,7 +58,6 @@ public class SignUpActivity extends AppCompatActivity {
         passwordBox = findViewById(R.id.su_txtPassword);
         confirmPasswordBox = findViewById(R.id.su_txtRePassword);
         isCarer = findViewById(R.id.su_swtIsACarer);
-        hasCarer = findViewById(R.id.su_swtHasACarer);
         signUpButton = findViewById(R.id.su_btnSignUp);
     }
 
@@ -70,20 +68,6 @@ public class SignUpActivity extends AppCompatActivity {
                 closeKeyboard();
                 showProgressRing();
                 createUser();
-            }
-        });
-        isCarer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked && hasCarer.isChecked()) {
-                    hasCarer.setChecked(false); // Makes sure 'is a carer' and 'has a carer' options can't both be TRUE
-                }
-            }
-        });
-        hasCarer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked && isCarer.isChecked()) {
-                    isCarer.setChecked(false); // Makes sure 'is a carer' and 'has a carer' options can't both be TRUE
-                }
             }
         });
     }
@@ -171,7 +155,7 @@ public class SignUpActivity extends AppCompatActivity {
         FirebaseUser newUser = firebaseAuthentication.getCurrentUser();
         if (newUser != null) {
             String userId = firebaseAuthentication.getCurrentUser().getUid();
-            UserEntity userEntity = new UserEntity(userId, userName, userEmail, isCarer.isChecked(), hasCarer.isChecked());
+            UserEntity userEntity = new UserEntity(userId, userName, userEmail, isCarer.isChecked());
             dbService.addUser(userEntity, new CallbackResult() {
                 @Override
                 public void onCallback(Boolean result) {
