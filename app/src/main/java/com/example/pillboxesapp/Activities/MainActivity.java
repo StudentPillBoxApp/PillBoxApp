@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pillboxesapp.R;
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -106,10 +109,17 @@ public class MainActivity extends AppCompatActivity {
         String email = emailBox.getText().toString().trim();
         String password = passwordBox.getText().toString().trim();
         if (!validFields(email, password)) {
+            hideProgressRing();
+            return;
+        }
+        if (!isDeviceConnectedToServer()) {
+            hideProgressRing();
+            Toast.makeText(MainActivity.this, "No network connection", Toast.LENGTH_SHORT).show();
             return;
         }
         firebaseAuthentication = FirebaseAuth.getInstance();
-        firebaseAuthentication.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        final Task<AuthResult> loginTask = firebaseAuthentication.signInWithEmailAndPassword(email, password);
+        loginTask.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -117,11 +127,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
                     openHomeActivity();
                 } else {
-                    hideProgressRing();
-                    Toast.makeText(MainActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    // TODO: Fix null-pointer exception.
-
+                    displayErrorMessage(loginTask);
                 }
+            }
+        });
+        loginTask.addOnCanceledListener(new OnCanceledListener() {
+            @Override
+            public void onCanceled() {
+                displayErrorMessage(loginTask);
             }
         });
     }
@@ -145,6 +158,21 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private boolean isDeviceConnectedToServer() {
+        ConnectivityManager cm = (ConnectivityManager) MainActivity.this
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = null;
+        if (cm != null) {
+            activeNetwork = cm.getActiveNetworkInfo();
+        }
+        return null != activeNetwork;
+    }
+
+    private void displayErrorMessage(Task<AuthResult> task) {
+        hideProgressRing();
+        Toast.makeText(MainActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     private void openSignUpActivity() {
