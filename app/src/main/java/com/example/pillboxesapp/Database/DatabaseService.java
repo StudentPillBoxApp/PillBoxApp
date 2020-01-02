@@ -263,10 +263,10 @@ public class DatabaseService implements IDatabaseService {
             if (document.exists()) {
                 String id = document.getId();
                 String userID = (String) document.get(FIELD_USER_ID);
-                int boxNum = (int) document.get(FIELD_BOX_NUM);
+                Long boxNum = (Long) document.get(FIELD_BOX_NUM);
                 String pillName = (String) document.get(FIELD_PILL_NAME);
-                int stock = (int) document.get(FIELD_STOCK);
-                PillBoxEntity pillBoxEntity = new PillBoxEntity(id, userID, pillName, boxNum, stock);
+                Long stock = (Long) document.get(FIELD_STOCK);
+                PillBoxEntity pillBoxEntity = new PillBoxEntity(id, userID, pillName, boxNum.intValue(), stock.intValue());
                 pillBoxEntities.add(pillBoxEntity);
             }
         }
@@ -294,9 +294,9 @@ public class DatabaseService implements IDatabaseService {
                 String id = document.getId();
                 String startDate = (String) document.get(FIELD_DATE);
                 String startTime = (String) document.get(FIELD_DATE);
-                int repeat = (int) document.get(FIELD_REPEAT);
-                int quantity = (int) document.get(FIELD_QUANTITY);
-                AlarmEntity alarmEntity = new AlarmEntity(id, startDate, startTime, repeat, quantity);
+                Long repeat = (Long) document.get(FIELD_REPEAT);
+                Long quantity = (Long) document.get(FIELD_QUANTITY);
+                AlarmEntity alarmEntity = new AlarmEntity(id, startDate, startTime, repeat.intValue(), quantity.intValue());
                 alarmEntities.add(alarmEntity);
             }
         }
@@ -348,7 +348,7 @@ public class DatabaseService implements IDatabaseService {
         String strDate = (String) document.get(FIELD_DATE);
         String strTime = (String) document.get(FIELD_TIME);
         String dateAndTime = strDate + " " + strTime;
-        Date alarmDate = new Date();
+        Date alarmDate;
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             alarmDate = dateFormat.parse(dateAndTime);

@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.pillboxesapp.Database.CallbackResult;
+import com.example.pillboxesapp.Database.DatabaseService;
 import com.example.pillboxesapp.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setupTabs();
+        removeRedundantAlarms();
         enableBluetooth();
     }
 
@@ -46,6 +49,16 @@ public class HomeActivity extends AppCompatActivity {
         Intent logoutIntent = new Intent(this, MainActivity.class);
         startActivity(logoutIntent);
         finish();
+    }
+
+    private void removeRedundantAlarms() {
+        DatabaseService dbService = new DatabaseService();
+        dbService.removeRedundantAlarms(new CallbackResult() {
+            @Override
+            public void onCallback(Boolean result) {
+                super.onCallback(result);
+            }
+        });
     }
 
     private void enableBluetooth() {

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -81,24 +83,26 @@ public class SignUpActivity extends AppCompatActivity {
             hideProgressRing();
             return;
         }
-        Task<AuthResult> loginTask = firebaseAuthentication.createUserWithEmailAndPassword(userEmail, password);
-        loginTask.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        if (!isDeviceConnectedToServer()) {
+            hideProgressRing();
+            Toast.makeText(SignUpActivity.this, "No network connection", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final Task<AuthResult> signUpTask = firebaseAuthentication.createUserWithEmailAndPassword(userEmail, password);
+        signUpTask.addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     addUserCollectionToDatabase();
                 } else {
-                    hideProgressRing();
-                    Toast.makeText(SignUpActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    // TODO: Fix null-pointer exception.
+                    displayErrorMessage(signUpTask);
                 }
             }
         });
-        loginTask.addOnCanceledListener(new OnCanceledListener() {
+        signUpTask.addOnCanceledListener(new OnCanceledListener() {
             @Override
             public void onCanceled() {
-                hideProgressRing();
-                Toast.makeText(SignUpActivity.this, "Error: ", Toast.LENGTH_SHORT).show();
+                displayErrorMessage(signUpTask);
             }
         });
     }
@@ -132,6 +136,21 @@ public class SignUpActivity extends AppCompatActivity {
         return true;
     }
 
+    private boolean isDeviceConnectedToServer() {
+        ConnectivityManager cm = (ConnectivityManager) SignUpActivity.this
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = null;
+        if (cm != null) {
+            activeNetwork = cm.getActiveNetworkInfo();
+        }
+        return null != activeNetwork;
+    }
+
+    private void displayErrorMessage(Task<AuthResult> task) {
+        hideProgressRing();
+        Toast.makeText(SignUpActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
     private void closeKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
@@ -161,7 +180,7 @@ public class SignUpActivity extends AppCompatActivity {
                 public void onCallback(Boolean result) {
                     hideProgressRing();
                     if (result) {
-                        Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                         openHomeActivity();
                     } else {
                         Toast.makeText(SignUpActivity.this, "Error: User details could not be added to the database.", Toast.LENGTH_SHORT).show();
