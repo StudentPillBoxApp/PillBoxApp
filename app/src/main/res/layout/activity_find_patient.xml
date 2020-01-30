@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:fillViewport="true"
+    tools:context=".Activities.FindPatientActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/find_p_guidelineL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/find_p_guidelineR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/find_p_guidelineT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/find_p_guidelineB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <EditText
+            android:id="@+id/find_p_txtEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/prompt_email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/background_light"
+            app:backgroundTint="@android:color/background_light"
+            app:layout_constraintEnd_toStartOf="@+id/find_p_guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/find_p_guidelineL"
+            app:layout_constraintTop_toTopOf="@+id/find_p_guidelineT" />
+
+        <Button
+            android:id="@+id/find_p_btnFindPatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@android:color/holo_orange_dark"
+            android:padding="10dp"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/find_p_guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/find_p_guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/find_p_txtEmail" />
+
+        <ProgressBar
+            android:id="@+id/find_p_progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/find_p_guidelineB"
+            app:layout_constraintEnd_toStartOf="@+id/find_p_guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/find_p_guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/find_p_btnFindPatient"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/find_p_btnAddUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:clickable="true"
+            android:foregroundTint="@android:color/holo_orange_dark"
+            android:tint="@android:color/holo_orange_dark"
+            android:visibility="invisible"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/find_p_guidelineB"
+            app:layout_constraintEnd_toStartOf="@+id/find_p_guidelineR"
+            app:layout_constraintStart_toEndOf="@id/find_p_txtResult"
+            app:layout_constraintTop_toBottomOf="@+id/find_p_progressBar"
+            app:layout_constraintVertical_bias="0.0"
+            app:maxImageSize="30dp"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <TextView
+            android:id="@+id/find_p_txtResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:backgroundTint="@android:color/background_light"
+            app:layout_constraintBottom_toTopOf="@+id/find_p_guidelineB"
+            app:layout_constraintEnd_toStartOf="@id/find_p_btnAddUser"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/find_p_guidelineL"
+            app:layout_constraintTop_toBottomOf="@+id/find_p_progressBar"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

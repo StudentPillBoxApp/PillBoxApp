@@ -41,6 +41,8 @@ public interface IDatabaseService {
 
     void isUserCarer(String userID, final ICallbackResult callback);
 
+    void linkPatientAndCarer(String patientID, String CarerID, final ICallbackResult callback);
+
     void loadCarersPatients(String carerID, final ICallbackResult callback);
 
     void loadUsersPillBoxes(String userID, final ICallbackResult callback);

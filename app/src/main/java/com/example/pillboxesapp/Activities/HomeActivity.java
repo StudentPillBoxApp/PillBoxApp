@@ -83,4 +83,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void openFindPatientActivity() {
+        Intent intentFindPatient = new Intent(this, FindPatientActivity.class);
+        startActivity(intentFindPatient);
+        finish();
+    }
 }

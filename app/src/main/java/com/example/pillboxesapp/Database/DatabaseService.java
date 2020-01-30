@@ -220,6 +220,21 @@ public class DatabaseService implements IDatabaseService {
     }
 
     @Override
+    public void linkPatientAndCarer(String patientID, String CarerID, final ICallbackResult callback) {
+        DocumentReference patientEntity = database.collection(COLLECTION_USER).document(patientID);
+        patientEntity.update(FIELD_CARER_ID, CarerID).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    callback.onCallback(true);
+                } else {
+                    callback.onCallback(false);
+                }
+            }
+        });
+    }
+
+    @Override
     public void loadCarersPatients(String carerID, final ICallbackResult callback) {
         CollectionReference userCollection = database.collection(COLLECTION_USER);
         Query query = userCollection.whereEqualTo(FIELD_CARER_ID, carerID).whereEqualTo(FIELD_USER_TYPE, VALUE_PATIENT);
