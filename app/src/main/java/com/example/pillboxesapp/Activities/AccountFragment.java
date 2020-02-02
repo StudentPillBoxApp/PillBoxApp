@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pillboxesapp.R;
 
-
 public class AccountFragment extends Fragment {
     private View view;
     private HomeActivity homeActivity;

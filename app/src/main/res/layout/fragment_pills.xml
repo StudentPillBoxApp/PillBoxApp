@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:fillViewport="true"
     android:orientation="vertical">
 
@@ -37,6 +39,51 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.9" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="128dp"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            android:clickable="true"
+            android:foregroundTint="@android:color/background_light"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@android:color/holo_orange_dark"
+            app:layout_constraintBottom_toTopOf="@+id/pills_guidelineB"
+            app:layout_constraintEnd_toStartOf="@+id/pills_guidelineR"
+            app:layout_constraintStart_toStartOf="@+id/pills_guidelineL"
+            app:layout_constraintTop_toBottomOf="@id/txtPillBoxNumber"
+            app:layout_constraintVertical_bias="0.0"
+            app:rippleColor="@android:color/background_light"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+        <TextView
+            android:id="@+id/txtPillBoxNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="No Pillboxes"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/pills_guidelineL"
+            app:layout_constraintTop_toTopOf="@+id/pills_guidelineT" />
+
+        <Button
+            android:id="@+id/pillBoxEditButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            android:text="Edit"
+            android:textColor="@android:color/background_light"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+            app:layout_constraintEnd_toStartOf="@+id/pills_guidelineR"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/txtPillBoxNumber"
+            app:layout_constraintTop_toTopOf="@+id/pills_guidelineT"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

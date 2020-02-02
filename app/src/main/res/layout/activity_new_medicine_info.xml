@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:fillViewport="true"
+    tools:context=".Activities.NewMedicineInfoActivity">
+
+    <Button
+        android:id="@+id/btnDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="Date"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/btnTimeTwo" />
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="105dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="38dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintStart_toEndOf="@+id/btnDate"
+        app:layout_constraintTop_toBottomOf="@+id/btnTimeFour" />
+
+    <TextView
+        android:id="@+id/txtViewTimeFour"
+        android:layout_width="63dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="34dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@android:color/background_light"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/btnTimeFour"
+        app:layout_constraintTop_toBottomOf="@+id/btnTimeThree" />
+
+    <TextView
+        android:id="@+id/txtViewTimeThree"
+        android:layout_width="63dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="34dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@android:color/background_light"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/btnTimeThree"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/txtViewTimeTwo"
+        android:layout_width="63dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="34dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@android:color/background_light"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/btnTimeTwo"
+        app:layout_constraintTop_toBottomOf="@+id/btnTimeOne" />
+
+    <Button
+        android:id="@+id/btnTimeThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="Time 3"
+        android:textColor="@android:color/background_light"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/txtViewTimeOne"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/btnTimeFour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="Time 4"
+        android:textColor="@android:color/background_light"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/txtViewTimeTwo"
+        app:layout_constraintTop_toBottomOf="@+id/btnTimeThree" />
+
+    <Button
+        android:id="@+id/btnTimeTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="Time 2"
+        android:textColor="@android:color/background_light"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/btnTimeOne" />
+
+    <EditText
+        android:id="@+id/MedicineName"
+        android:layout_width="290dp"
+        android:layout_height="65dp"
+        android:backgroundTint="@android:color/background_light"
+        android:ems="10"
+        android:hint="Medicine Name"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="270dp"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="Save"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/EnterPills" />
+
+    <CheckBox
+        android:id="@+id/everydayrepeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="34dp"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        android:buttonTint="@android:color/background_light"
+        android:text="Daily"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/Repeat1"
+        app:layout_constraintTop_toBottomOf="@+id/btnDate" />
+
+    <TextView
+        android:id="@+id/Repeat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:text="Repeat"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Number of Pills: "
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/neverrepeat" />
+
+    <EditText
+        android:id="@+id/EnterPills"
+        android:layout_width="95dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/background_light"
+        android:ems="10"
+        android:fontFamily="sans-serif-medium"
+        android:inputType="number"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintStart_toEndOf="@+id/quantity"
+        app:layout_constraintTop_toBottomOf="@+id/neverrepeat" />
+
+    <CheckBox
+        android:id="@+id/eveyxdaysrepeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@android:color/background_light"
+        android:buttonTint="@android:color/background_light"
+        android:text="Every"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/Repeat1"
+        app:layout_constraintTop_toBottomOf="@+id/everydayrepeat" />
+
+    <CheckBox
+        android:id="@+id/neverrepeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"
+        android:buttonTint="@android:color/background_light"
+        android:text="Never"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/Repeat1"
+        app:layout_constraintTop_toBottomOf="@+id/eveyxdaysrepeat" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="37dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@android:color/background_light"
+        android:ems="10"
+        android:fontFamily="sans-serif-medium"
+        android:inputType="number"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintStart_toEndOf="@+id/eveyxdaysrepeat"
+        app:layout_constraintTop_toBottomOf="@+id/everydayrepeat" />
+
+    <TextView
+        android:id="@+id/days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="days"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/everydayrepeat" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="694dp"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="380dp"
+        app:layout_constraintGuide_percent=".95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:text="Start Date:"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/btnTimeTwo" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="54dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="245dp"
+        android:backgroundTint="@android:color/background_light"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/MedicineName" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="240dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:text="Enter number of pills per day"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/MedicineName" />
+
+    <Button
+        android:id="@+id/btnTimeOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="Time 1"
+        android:textColor="@android:color/background_light"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
+    <TextView
+        android:id="@+id/txtViewTimeOne"
+        android:layout_width="63dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="34dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@android:color/background_light"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/btnTimeOne"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
