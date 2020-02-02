@@ -29,18 +29,13 @@ import java.util.UUID;
 public class HomeActivity extends AppCompatActivity {
     private final int btEnableCode = 1;
     private ViewPager viewPager;
-    private BluetoothAdapter btAdapter;
-    private BluetoothSocket btSocket;
-    private static final UUID arduinoID = UUID.fromString("19B10001-E8F2-537E-4F6C-D104768A1214");
-    //19B10001-E8F2-537E-4F6C-D104768A1214
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setupTabs();
         removeRedundantAlarms();
-        enableBluetooth();
-        connectToArduino();
     }
 
     private void setupTabs() {
@@ -103,42 +98,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void openNewMedicineActivity() {
         Intent intentNewMedicine = new Intent(this, NewMedicineInfoActivity.class);
         startActivity(intentNewMedicine);
-    }
-
-    private void enableBluetooth() {
-        btAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (btAdapter != null) {
-            if (!btAdapter.isEnabled()) {
-                Intent btEnableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(btEnableIntent, btEnableCode);
-            }
-        } else {
-            Toast.makeText(HomeActivity.this, "Bluetooth is not supported on this device.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void connectToArduino() {
-        String btAddress = btAdapter.getAddress();
-        BluetoothDevice btDevice = btAdapter.getRemoteDevice(btAddress);
-        try {
-            btSocket = btDevice.createInsecureRfcommSocketToServiceRecord(arduinoID);
-            btSocket.connect();
-            turnOnLED();
-            Toast.makeText(HomeActivity.this, "Connected to pill box.", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            Toast.makeText(HomeActivity.this, "Bluetooth connection failed.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void turnOnLED() {
-        String ledOnCodeWord = "1";
-        try {
-            if (btSocket != null) {
-                btSocket.getOutputStream().write(ledOnCodeWord.getBytes());
-            }
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
