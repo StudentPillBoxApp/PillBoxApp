@@ -291,12 +291,13 @@ public class DatabaseService implements IDatabaseService {
         ArrayList<AlarmEntity> alarmEntities = new ArrayList<>();
         for (QueryDocumentSnapshot document : task.getResult()) {
             if (document.exists()) {
-                String id = document.getId();
                 String startDate = (String) document.get(FIELD_DATE);
-                String startTime = (String) document.get(FIELD_DATE);
+                String startTime = (String) document.get(FIELD_TIME);
+                String pillBoxID = (String) document.get(FIELD_PILL_BOX_ID);
+                ;
                 Long repeat = (Long) document.get(FIELD_REPEAT);
                 Long quantity = (Long) document.get(FIELD_QUANTITY);
-                AlarmEntity alarmEntity = new AlarmEntity(id, startDate, startTime, repeat.intValue(), quantity.intValue());
+                AlarmEntity alarmEntity = new AlarmEntity(startDate, startTime, pillBoxID, repeat.intValue(), quantity.intValue());
                 alarmEntities.add(alarmEntity);
             }
         }
@@ -360,5 +361,43 @@ public class DatabaseService implements IDatabaseService {
             redundant = true; // Stored date is before today's date.
         }
         return redundant;
+    }
+
+    @Override
+    public void updatePillBoxNameAndStock(String pillBoxID, String pillName, int pillStock, final ICallbackResult callback) {
+        database.collection(COLLECTION_PILL_BOXES).document(pillBoxID).update(FIELD_PILL_NAME, pillName, FIELD_STOCK, pillStock).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    callback.onCallback(true);
+                } else {
+                    callback.onCallback(false);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getPillBoxNameFromID(String pillBoxID, final ICallbackResult callback) {
+        database.collection(COLLECTION_PILL_BOXES).document(pillBoxID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    callback.onCallback(getPillName(task));
+                }
+            }
+        });
+    }
+
+    private String[] getPillName(@NonNull Task<DocumentSnapshot> task) {
+        String pillName[] = new String[1];
+        DocumentSnapshot document = task.getResult();
+        if (document.exists()) {
+            Object name = document.get(FIELD_PILL_NAME);
+            if (name != null) {
+                pillName[0] = name.toString();
+            }
+        }
+        return pillName;
     }
 }

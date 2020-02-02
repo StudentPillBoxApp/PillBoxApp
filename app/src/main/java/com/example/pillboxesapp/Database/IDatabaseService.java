@@ -51,4 +51,8 @@ public interface IDatabaseService {
 
     void removeRedundantAlarms(final ICallbackResult callback);
 
+    void updatePillBoxNameAndStock(String pillBoxID, String pillName, int pillStock, final ICallbackResult callback);
+
+    void getPillBoxNameFromID(String pillBoxID, final ICallbackResult callback);
+
 }
