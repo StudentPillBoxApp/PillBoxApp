@@ -31,8 +31,8 @@ public class HomeActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private BluetoothAdapter btAdapter;
     private BluetoothSocket btSocket;
-    private static final UUID arduinoID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
+    private static final UUID arduinoID = UUID.fromString("19B10001-E8F2-537E-4F6C-D104768A1214");
+    //19B10001-E8F2-537E-4F6C-D104768A1214
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         setupTabs();
         removeRedundantAlarms();
         enableBluetooth();
+        connectToArduino();
     }
 
     private void setupTabs() {
@@ -105,9 +106,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void enableBluetooth() {
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter != null) {
-            if (!bluetoothAdapter.isEnabled()) {
+        btAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (btAdapter != null) {
+            if (!btAdapter.isEnabled()) {
                 Intent btEnableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(btEnableIntent, btEnableCode);
             }
@@ -130,7 +131,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void turnOnLED() {
-        String ledOnCodeWord = "a";
+        String ledOnCodeWord = "1";
         try {
             if (btSocket != null) {
                 btSocket.getOutputStream().write(ledOnCodeWord.getBytes());
